@@ -1,0 +1,15 @@
+body, html {
+    background-color: black;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    word-wrap: break-word;
+}
+
+#typing-area {
+    word-wrap: break-all;
+}
+
+.correct {
+    color: rgb(0, 160, 0);
+    font-weight: bold;
+}
