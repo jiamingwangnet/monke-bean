@@ -13,11 +13,22 @@
         href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="main.css">
+    <script src="main.js"></script>
 </head>
 
 <body>
+    <nav id="nav">
+        <select id="charset">
+            <option value="easy">Easy</option>
+            <option value="cheap">Cheap</option>
+            <option value="simple" selected="selected">Simple</option>
+            <option value="difficult">Difficult</option>
+            <option value="extended">Extended</option>
+            <option value="unicode">Unicode</option>
+        </select>
+        <button onclick="startTyping();">Start</button>
+    </nav>
     <div id="typing-area"></div>
-    <script src="main.js"></script>
 </body>
 
 </html>

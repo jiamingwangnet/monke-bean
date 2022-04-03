@@ -1,11 +1,12 @@
-const typingArea = document.querySelector('#typing-area');
 const typingSpeed = 10;
 const desiredResult = "bean";
 
 const typedCharacters = [];
 
 const charsets = {
-    simple: [36, 127],
+    easy: [0x61, 0x7A],
+    cheap: [0x41, 0x7A],
+    simple: [36, 126],
     difficult: [0x00, 0xff],
     extended: [0x00, 0xffff],
     unicode: [0x00, 0x10ffff]
@@ -26,11 +27,22 @@ function addToTyped(char)
     {
         typedCharacters.push(char);
     }
+    else
+    {
+        typedCharacters.splice(0, typedCharacters.length);
+    }
 }
 
-function type()
+function startTyping()
 {
-    const randChar = getRandomCharacter(charsets.simple[0], charsets.simple[1]);
+    const typingArea = document.querySelector('#typing-area');
+    const charset = document.querySelector("#charset").value;
+    const nav = document.querySelector("#nav");
+
+    nav.style.display = "none";
+
+    const randChar = getRandomCharacter(charsets[charset][0], charsets[charset][1]);
+    console.log(typedCharacters)
 
     typingArea.innerText += randChar;
     addToTyped(randChar);
@@ -44,8 +56,13 @@ function type()
     }
     else
     {
-        setTimeout(type, typingSpeed);
+        setTimeout(startTyping, typingSpeed);
     }
 }
 
-window.onload = type;
+function pageScroll() {
+    window.scrollBy(0,1);
+    scrolldelay = setTimeout(pageScroll,2);
+}
+
+pageScroll();
