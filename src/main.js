@@ -4,7 +4,7 @@ const desiredResult = "bean";
 const typedCharacters = [];
 
 const charsets = {
-    speedy: [0x61, 0x6F],
+    speedy: [0x61, 0x6E],
     easy: [0x61, 0x7A],
     cheap: [0x41, 0x7A],
     simple: [36, 126],
@@ -56,6 +56,7 @@ function startTyping()
         typingArea.innerHTML = typingArea.innerHTML.substring(0, typingArea.innerHTML.length - desiredResult.length);
 
         typingArea.innerHTML += `<span class='correct'>${desiredResult}</span>`;
+        winner();
         return;
     }
     else
@@ -67,13 +68,13 @@ function startTyping()
 function winner()
 {
     const winnerPopup = document.querySelector(".winner");
-    const resultText = documnet.querySelector("#result");
+    const resultText = document.querySelector("#result");
     const charset = document.querySelector("#charset").value;
     const settings = document.querySelector("#settings");
 
     winnerPopup.style.display = "block";
-    resultText.innerHTML = `You got "bean" in <b>${charCounter}</b> characters!`
-    settings.innerHTML = `Character set: ${charset}\nChance: ${(charsets[charset][1] - charsets[charset][0] + 1) ** desiredResult.length}`;
+    resultText.innerHTML = `You got "bean" after <b>${charCounter}</b> characters!`
+    settings.innerHTML = `Character set: ${charset}<br>Chance: 1 in ${(charsets[charset][1] - charsets[charset][0] + 1) ** desiredResult.length}`;
 }
 
 function pageScroll() {
