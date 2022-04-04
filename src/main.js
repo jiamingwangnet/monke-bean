@@ -72,9 +72,36 @@ function winner()
     const charset = document.querySelector("#charset").value;
     const settings = document.querySelector("#settings");
 
+    let formatedRange01 = "";
+    let formatedRange02 = "";
+
+    for(let i = 0; i < 6; i++)
+    {
+        if(6 - i > charsets[charset][0].toString(16).length)
+        {
+            formatedRange01 += "0";
+        }
+        else
+        {
+            formatedRange01 += charsets[charset][0].toString(16)[i - (6 - charsets[charset][0].toString(16).length)];
+        }
+    }
+
+    for(let i = 0; i < 6; i++)
+    {
+        if(6 - i > charsets[charset][1].toString(16).length)
+        {
+            formatedRange02 += "0";
+        }
+        else
+        {
+            formatedRange02 += charsets[charset][1].toString(16)[i - (6 - charsets[charset][1].toString(16).length)];
+        }
+    }
+
     winnerPopup.style.display = "block";
     resultText.innerHTML = `You got "bean" after <b>${charCounter}</b> characters!`
-    settings.innerHTML = `Character set: ${charset}<br>Chance: 1 in ${(charsets[charset][1] - charsets[charset][0] + 1) ** desiredResult.length}`;
+    settings.innerHTML = `Character set: ${charset}<br>Chance: 1 in ${(charsets[charset][1] - charsets[charset][0] + 1) ** desiredResult.length}<br>Range: U+${formatedRange01} - U+${formatedRange02}`;
 }
 
 function pageScroll() {
