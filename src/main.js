@@ -4,6 +4,7 @@ const desiredResult = "bean";
 const typedCharacters = [];
 
 const charsets = {
+    speedy: [0x61, 0x6F],
     easy: [0x61, 0x7A],
     cheap: [0x41, 0x7A],
     simple: [36, 126],
@@ -33,6 +34,8 @@ function addToTyped(char)
     }
 }
 
+let charCounter = 0;
+
 function startTyping()
 {
     const typingArea = document.querySelector('#typing-area');
@@ -45,6 +48,7 @@ function startTyping()
     console.log(typedCharacters)
 
     typingArea.innerText += randChar;
+    charCounter++;
     addToTyped(randChar);
 
     if(checkForResult())
@@ -60,9 +64,31 @@ function startTyping()
     }
 }
 
+function winner()
+{
+    const winnerPopup = document.querySelector(".winner");
+    const resultText = documnet.querySelector("#result");
+    const charset = document.querySelector("#charset").value;
+    const settings = document.querySelector("#settings");
+
+    winnerPopup.style.display = "block";
+    resultText.innerHTML = `You got "bean" in <b>${charCounter}</b> characters!`
+    settings.innerHTML = `Character set: ${charset}\nChance: ${(charsets[charset][1] - charsets[charset][0] + 1) ** desiredResult.length}`;
+}
+
 function pageScroll() {
     window.scrollBy(0,1);
     scrolldelay = setTimeout(pageScroll,2);
 }
 
+function writeChance() {
+    const charset = document.querySelector("#charset").value;
+    const chanceText = document.querySelector("#chance");
+
+    let chance = (charsets[charset][1] - charsets[charset][0] + 1) ** desiredResult.length;
+
+    chanceText.innerHTML = `1 in <b>${chance}</b> chance`;
+}
+
+window.onload = writeChance;
 pageScroll();
